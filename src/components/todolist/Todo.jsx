@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TodoLists from "./TodoLists";
 
 function Todo() {
   const resetBtn = () => {
@@ -20,6 +21,17 @@ function Todo() {
   const itemEvent = (event) => {
     setData(event.target.value);
   };
+
+  const deleteItem = (id) => {
+    console.log("deleted");
+
+    setItems((oldItems) => {
+      return oldItems.filter((errElem, index) => {
+        return index !== id;
+      });
+    });
+  };
+
 
   return (
     <>
@@ -59,13 +71,15 @@ function Todo() {
             <button className="bg-white px-4 py-2 rounded">Completed</button>
           </div>
 
-          {items.map((itemval) => {
+          {items.map((itemval, index) => {
             return (
-              <div className="box text-gray-300 mt-8 py-8 px-4 rounded">
-                <div>
-                  <h1>{itemval}</h1>
-                </div>
-              </div>
+              <TodoLists
+                key={index}
+                id={index}
+                text={itemval}
+                onSelect={deleteItem}
+             
+              />
             );
           })}
         </div>
