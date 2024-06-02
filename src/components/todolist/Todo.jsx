@@ -1,16 +1,26 @@
-import React from "react";
-
-const resetBtn = () => {
-  document.getElementById("inputData").value = "";
-};
-
-const submitBtn = () => {
-  const inData = document.getElementById("inputData");
-  console.log(inData.value);
-  inData.value = "";
-};
+import React, { useState } from "react";
 
 function Todo() {
+  const resetBtn = () => {
+    document.getElementById("inputData").value = "";
+  };
+
+  let [data, setData] = useState("");
+  let [items, setItems] = useState([]);
+
+  const submitBtn = () => {
+    const inData = document.getElementById("inputData");
+    setItems((oldItems) => {
+      return [...oldItems, data];
+    });
+    inData.value = "";
+    console.log(items);
+  };
+
+  const itemEvent = (event) => {
+    setData(event.target.value);
+  };
+
   return (
     <>
       <div className="h-screen w-auto flex flex-col items-center p-32">
@@ -25,6 +35,7 @@ function Todo() {
             <input
               type="text"
               id="inputData"
+              onChange={itemEvent}
               className="input w-full "
               placeholder="add here"
             />
@@ -47,6 +58,16 @@ function Todo() {
             <button className="bg-white px-4 py-2 rounded">Active</button>
             <button className="bg-white px-4 py-2 rounded">Completed</button>
           </div>
+
+          {items.map((itemval) => {
+            return (
+              <div className="box text-gray-300 mt-8 py-8 px-4 rounded">
+                <div>
+                  <h1>{itemval}</h1>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>

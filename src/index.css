@@ -11,8 +11,10 @@ body {
   background-color: rgb(31, 31, 56);
 }
 
-.active {
-  color: aqua;
+.box{
+  /* border: 2px solid purple ; */
+  /* background-color: transparent; */
+  background-color: rgb(38, 38, 57);
 }
 
 @media only screen and (max-width: 768px) {
