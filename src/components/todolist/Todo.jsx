@@ -14,7 +14,7 @@ function Todo() {
   return (
     <>
       <div className="h-screen w-auto flex flex-col items-center p-32">
-        <div className=" logo w-8/12">
+        <div className=" logo w-8/12 flex text-left">
           <h1 className=" pl-8 text-5xl text-white font-semibold">
             to<span className="text-purple-600">do.</span>
           </h1>
@@ -28,7 +28,7 @@ function Todo() {
               className="input w-full "
               placeholder="add here"
             />
-            <div className="flex gap-4">
+            <div className=" flex gap-4">
               <button
                 className="bg-white px-4 py-2 rounded"
                 onClick={submitBtn}
@@ -42,7 +42,7 @@ function Todo() {
           </div>
         </div>
         <div className="main p-8 mt-2 rounded-lg w-8/12 ">
-          <div className="flex gap-4">
+          <div className="buttons flex gap-4">
             <button className="bg-white px-4 py-2 rounded">All</button>
             <button className="bg-white px-4 py-2 rounded">Active</button>
             <button className="bg-white px-4 py-2 rounded">Completed</button>
