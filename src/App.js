@@ -7,8 +7,8 @@ function App() {
   const [todolist, setTodoList] = useState([]);
   const [toggle, setToggle] = useState(true);
   const [isEdit, setIsEdit] = useState(null);
-  const [work, setWork] = useState(true);
-  const [list, setList] = useState(null);
+  // const [work, setWork] = useState(false);
+  // const [list, setList] = useState(null);
   // console.log(todo);
 
   const addItem = () => {
@@ -24,6 +24,7 @@ function App() {
         })
       );
       setToggle(true);
+      // setWork(false);
       setText("");
       setIsEdit(null);
     } else {
@@ -31,6 +32,7 @@ function App() {
         id: uuidv4(),
         name: text,
         list: "Active",
+        // strike: work,
       };
       setTodoList([...todolist, allInputData]);
       setText("");
@@ -50,17 +52,21 @@ function App() {
     let newEditItem = todolist.find((elem) => {
       return elem.id === id;
     });
+    // setWork(false);
     setToggle(false);
+    // setWork(true);
     setText(newEditItem.name);
     setIsEdit(id);
   };
 
   const completeItem = (id) => {
     let newEditItem = todolist.find((elem) => {
-      return elem.id === id;
+      return (elem.list = "completed");
     });
-    setWork(false);
+
+    console.log(newEditItem.list);
   };
+  // console.log(newEditItem.strike, newEditItem.name);
 
   return (
     <>
@@ -121,15 +127,10 @@ function App() {
                 key={items.id}
               >
                 <div>
-                  {work ? (
-                    <h1>
-                      {items.name} - {items.list}
-                    </h1>
-                  ) : (
-                    <h1 className="line-through">
-                      {items.name} - {items.list}
-                    </h1>
-                  )}
+                  <h1>
+                    {items.name} - {items.list}
+                  </h1>
+
                   <div className="flex gap-4 mt-4">
                     <button
                       className="bg-green-500 text-black px-4 py-2 rounde"
