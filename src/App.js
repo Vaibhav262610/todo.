@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import List from "./components/List/List";
+// import List from "./components/List/List";
 
 function App() {
   const [text, setText] = useState("");
   const [todolist, setTodoList] = useState([]);
   const [toggle, setToggle] = useState(true);
   const [isEdit, setIsEdit] = useState(null);
-  // const [work, setWork] = useState(false);
-  // const [list, setList] = useState(null);
-  // console.log(todo);
+  const [line , setLine] = useState(false)
 
   const addItem = () => {
     if (text == "") {
@@ -31,12 +30,13 @@ function App() {
       const allInputData = {
         id: uuidv4(),
         name: text,
-        list: "Active",
+        // list: "Active",
         // strike: work,
       };
       setTodoList([...todolist, allInputData]);
       setText("");
-      console.log(allInputData);
+
+      // console.log(allInputData);
     }
   };
 
@@ -52,21 +52,23 @@ function App() {
     let newEditItem = todolist.find((elem) => {
       return elem.id === id;
     });
-    // setWork(false);
     setToggle(false);
-    // setWork(true);
     setText(newEditItem.name);
     setIsEdit(id);
   };
 
-  const completeItem = (id) => {
-    let newEditItem = todolist.find((elem) => {
-      return (elem.list = "completed");
-    });
+  // const completeItem = () => {
+  //   let newEditItem = todolist.find((elem) => {
+  //     return (elem.list = "completed");
+  //   });
 
-    console.log(newEditItem.list);
-  };
+  //   console.log(newEditItem.list);
+  // };
   // console.log(newEditItem.strike, newEditItem.name);
+
+  const lineComp = () => {
+    setLine(true)
+  }
 
   return (
     <>
@@ -127,14 +129,12 @@ function App() {
                 key={items.id}
               >
                 <div>
-                  <h1>
-                    {items.name} - {items.list}
-                  </h1>
+                  <List text={items.name} cut = {line}/>
 
                   <div className="flex gap-4 mt-4">
                     <button
                       className="bg-green-500 text-black px-4 py-2 rounde"
-                      onClick={() => completeItem(items.id, items.list)}
+                      onClick={lineComp}
                     >
                       Completed
                     </button>
